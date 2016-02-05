@@ -306,6 +306,39 @@ Os logs do upstart ficam em
 
 `/etc/logs/upstart
 
+## Monit
+
+`apt-get install monit`
+
+Configuracao
+
+`vim etc/monit/monitrc`
+
+Configuracao por projeto
+
+`vim /etc/monit/config.d/tripolist.conf`
+
+Configuração para monitorar o arquivo restart e reiniciar a aplicacao
+
+check file restart.txt with path /var/www/tripolist/tmp/restart.txt
+  group tripolist
+  if changed timestamp then restart
+
+check process tripolist-app
+  with pidfile /var/run/tripolist/unicorn.pid
+  group tripolist
+  start program = "/sbin/start tripolist-app"
+  stop program = "/sbin/stop tripolist-app"
+
+  Restart do monit
+
+  `service monit restart`
+
+  Log do monit
+
+  `/var/log/monit.log
+
+
 
 
 
