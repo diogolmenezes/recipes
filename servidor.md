@@ -173,7 +173,7 @@ Colocar o projeto em /var/www/projeto
 # configurando o arquivo do mina
 
 Dentro do diretorio do projeto local inicialize o mina para que ele possa criar o arquivo deploy.rb,
- você deve configurar esse arquivo como no projeto tripolist.
+você deve configurar esse arquivo como no projeto tripolist.
 
 `mina init`
 
@@ -261,11 +261,11 @@ start on runlevel [2345]
 stop on runlevel [016]
 
 pre-start script
-  mkdir -p /var/log/taskv
-  chown -R www-data /var/log/taskv
+mkdir -p /var/log/taskv
+chown -R www-data /var/log/taskv
 
-  mkdir -p /var/run/taskv
-  chown -R www-data /var/run/taskv
+mkdir -p /var/run/taskv
+chown -R www-data /var/run/taskv
 end script
 
 
@@ -308,43 +308,30 @@ Os logs do upstart ficam em
 
 ## Monit
 
-`apt-get install monit`
+O Monit serve para monitorar processos e tomar ações em casos de erro. Nesse caso usaremos para monitorar um arquivo
+que atualizaremos sempre que fizermos o deploy com o mina. Quando a data mudar o monit irá reiniciar o unicorn.
 
-Configuracao
+Ver receita do monit
 
-`vim etc/monit/monitrc`
+## Elastic Search
 
-Configuracao por projeto
+Full text search, ver receita do elastic search
 
-`vim /etc/monit/config.d/tripolist.conf`
+## Configurando DNS
 
-Configuração para monitorar o arquivo restart e reiniciar a aplicacao
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-a-host-name-with-digitalocean
 
-check file restart.txt with path /var/www/tripolist/tmp/restart.txt
-  group tripolist
-  if changed timestamp then restart
+## Configurando firewall
 
-check process tripolist-app
-  with pidfile /var/run/tripolist/unicorn.pid
-  group tripolist
-  start program = "/sbin/start tripolist-app"
-  stop program = "/sbin/stop tripolist-app"
+Usar o UFW para gerenciar o firewall, ver receita o ufw
 
-  Restart do monit
+# Backup de MySql com automysqlbackup
 
-  `service monit restart`
+Faz backup automatico do mysql, ver receita do automysqlbackup
 
-  Log do monit
+# LogWatch
 
-  `/var/log/monit.log
-
-
-
-
-
-
-
-
+Manda um relatorio diario do servidor, ver receita do logwatch
 
 
 

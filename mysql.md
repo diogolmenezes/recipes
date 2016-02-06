@@ -22,8 +22,38 @@ mysql>
 
 ## Habilitando conexões remotas
 
-Primeiro, você precisará configurar o MySQL para que ele ouça as conexões originadas por outros endereços IP que não 127.0.0.1. Abra o arquivo /etc/mysql/my.cnf e comente a linha que contém a configuração bind-address. 
+Primeiro, você precisará configurar o MySQL para que ele ouça as conexões originadas por outros endereços IP que não 127.0.0.1. Abra o arquivo /etc/mysql/my.cnf e comente a linha que contém a configuração bind-address.
 
 Agora, execute o comando abaixo para permitir que o usuário root possa conectar nessa máquina.
 
 `mysql -u root -p -e "CREATE USER 'root'@'%'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"`
+
+## Criando Dumps
+
+`mysqldump -u root -p[root_password] [database_name] > dumpfilename.sql`
+
+## Recuperando Dumps
+
+Essa senha é colada no -p mesmo.
+
+`mysql -u root -psenha tripolist < dumpfilename.sql`
+
+## Dump para Gzip
+
+`mysql -u root -psenha tripolist | gzip -9 > dumpfilename.gz`
+
+## Agendando backup no cron
+
+- https://www.digitalocean.com/community/tutorials/how-to-backup-mysql-databases-on-an-ubuntu-vps
+
+`vi ~/.my.cnf`
+
+Conteudo
+
+`[client]
+host=localhost
+user=root
+password=senha
+database=tripolist`
+
+`chmod 600 ~/.my.cnf`
