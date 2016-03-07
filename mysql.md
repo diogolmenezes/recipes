@@ -22,7 +22,8 @@ mysql>
 
 ## Habilitando conexões remotas
 
-Primeiro, você precisará configurar o MySQL para que ele ouça as conexões originadas por outros endereços IP que não 127.0.0.1. Abra o arquivo /etc/mysql/my.cnf e comente a linha que contém a configuração bind-address.
+Primeiro, você precisará configurar o MySQL para que ele ouça as conexões originadas por outros endereços IP que não 127.0.0.1. Abra o arquivo /etc/mysql/my.cnf e comente a linha que contém a configuração bind-address ou configure ela para
+bind-address = 0.0.0.0
 
 Agora, execute o comando abaixo para permitir que o usuário root possa conectar nessa máquina.
 
