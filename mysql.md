@@ -25,6 +25,10 @@ mysql>
 Primeiro, você precisará configurar o MySQL para que ele ouça as conexões originadas por outros endereços IP que não 127.0.0.1. Abra o arquivo /etc/mysql/my.cnf e comente a linha que contém a configuração bind-address ou configure ela para
 bind-address = 0.0.0.0
 
+Reinicie o mysql
+
+`sudo service mysql restart`
+
 Agora, execute o comando abaixo para permitir que o usuário root possa conectar nessa máquina.
 
 `mysql -u root -p -e "CREATE USER 'root'@'%'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"`
