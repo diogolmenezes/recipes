@@ -84,8 +84,7 @@ end`
 
 Cria esse arquivo vagrant-bootstrap.sh no mesmo diretorio que o vagrantfile contendo seu script de instalação das coisas.
 
-`#! /usr/bin/env bash
-echo "Iniciando o provisionamento da maquina..."
+`echo "Iniciando o provisionamento da maquina..."
 # sudo apt-get -qq update
 echo "Instalando o ruby, essentials e git..."
 sudo apt-get -y remove ruby > /dev/null 2>&1
