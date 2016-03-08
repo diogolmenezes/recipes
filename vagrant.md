@@ -84,8 +84,11 @@ end`
 
 Cria esse arquivo vagrant-bootstrap.sh no mesmo diretorio que o vagrantfile contendo seu script de instalação das coisas.
 
-`echo "Iniciando o provisionamento da maquina..."
-# sudo apt-get -qq update
+```#! /usr/bin/env bash
+echo "Iniciando o provisionamento da maquina..."
+echo 'deb [arch=amd64] http://apt.hellobits.com/ trusty main' | sudo tee /etc/apt/sources.list.d/hellobits.list > /dev/null 2>&1
+wget -q -O - http://apt.hellobits.com/hellobits.key | sudo apt-key add - > /dev/null 2>&1
+sudo apt-get -qq update
 echo "Instalando o ruby, essentials e git..."
 sudo apt-get -y remove ruby > /dev/null 2>&1
 sudo apt-get -y install build-essential libgmp3-dev ruby-2.3 git > /dev/null 2>&1
@@ -95,7 +98,7 @@ echo "mysql-server mysql-server/root_password_again password 123456" | debconf-s
 sudo apt-get -y install mysql-server-5.5 mysql-client libmysqlclient-dev > /dev/null 2>&1
 echo "Instalando o rails..."
 gem install --no-rdoc --no-ri rails
-echo "Provisionamento concluido com sucesso!"`
+echo "Provisionamento concluido com sucesso!"```
 
 Vc pode recarragar o provisionamento com 
 
