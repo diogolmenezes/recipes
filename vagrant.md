@@ -74,7 +74,6 @@ VagrantFile
 `Vagrant.configure(2) do |config|  
   config.vm.box = "ubuntu/trusty32"
   config.vm.provision :shell, path: "vagrant-bootstrap.sh"
-
   # resolve o problema de ficar parado esperando o network driver https://github.com/mitchellh/vagrant/issues/3860
   config.vm.provider "virtualbox" do |vb|    
     ### Change network card to PCnet-FAST III
@@ -88,19 +87,15 @@ Cria esse arquivo vagrant-bootstrap.sh no mesmo diretorio que o vagrantfile cont
 `#! /usr/bin/env bash
 echo "Iniciando o provisionamento da maquina..."
 # sudo apt-get -qq update
-
 echo "Instalando o ruby, essentials e git..."
 sudo apt-get -y remove ruby > /dev/null 2>&1
 sudo apt-get -y install build-essential libgmp3-dev ruby-2.3 git > /dev/null 2>&1
-
 echo "Instalando o mysql..."
 echo "mysql-server mysql-server/root_password password 123456" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password 123456" | debconf-set-selections
 sudo apt-get -y install mysql-server-5.5 mysql-client libmysqlclient-dev > /dev/null 2>&1
-
 echo "Instalando o rails..."
 gem install --no-rdoc --no-ri rails
-
 echo "Provisionamento concluido com sucesso!"`
 
 Vc pode recarragar o provisionamento com 
