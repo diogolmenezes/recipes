@@ -108,3 +108,15 @@ Vc pode recarragar o provisionamento com
 https://www.vagrantup.com/docs/provisioning/
 https://www.vagrantup.com/docs/provisioning/shell.html
 https://gist.github.com/rrosiek/8190550
+
+## Rodando maquinas 64bits no windows
+
+Talvez vc precise atuvar o Vt-x da virtualização
+
+basta desativar o hyper v
+
+abrir o cmd como administrador e rodar: dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
+
+depois reiniciar
+
+http://druss.co/2015/06/fix-vt-x-is-not-available-verr_vmx_no_vmx-in-virtualbox/
