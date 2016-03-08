@@ -87,16 +87,20 @@ Cria esse arquivo vagrant-bootstrap.sh no mesmo diretorio que o vagrantfile cont
 
 `#! /usr/bin/env bash
 echo "Iniciando o provisionamento da maquina..."
-sudo apt-get -qq update
+# sudo apt-get -qq update
+
 echo "Instalando o ruby, essentials e git..."
 sudo apt-get -y remove ruby > /dev/null 2>&1
-sudo apt-get -y build-essential libgmp3-dev install ruby-2.3 git > /dev/null 2>&1
+sudo apt-get -y install build-essential libgmp3-dev ruby-2.3 git > /dev/null 2>&1
+
 echo "Instalando o mysql..."
-sudo apt-get -y install mysql-server mysql-client libmysqlclient-dev > /dev/null 2>&1
-echo "Definindo a senha do  mysql..."
-mysqladmin -u root password 123456
+echo "mysql-server mysql-server/root_password password 123456" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password 123456" | debconf-set-selections
+sudo apt-get -y install mysql-server-5.5 mysql-client libmysqlclient-dev > /dev/null 2>&1
+
 echo "Instalando o rails..."
 gem install --no-rdoc --no-ri rails
+
 echo "Provisionamento concluido com sucesso!"`
 
 Vc pode recarragar o provisionamento com 
