@@ -64,3 +64,46 @@ Além de liberar a porta 3000, você deve iniciar o rails server sem binding.
 `config.vm.network "forwarded_port", guest: 3000, host: 3000`
 
 ` rails s -b 0.0.0.0`
+
+## Provisionamento
+
+É possivel criar um script com tudo que deve ser instalado na maquina, assim vc pode versionar seu vagrant file para poder levantar uma maquina sempre igual no vagrant up
+
+VagrantFile
+
+`Vagrant.configure(2) do |config|  
+  config.vm.box = "ubuntu/trusty32"
+  config.vm.provision :shell, path: "vagrant-bootstrap.sh"
+
+  # resolve o problema de ficar parado esperando o network driver https://github.com/mitchellh/vagrant/issues/3860
+  config.vm.provider "virtualbox" do |vb|    
+    ### Change network card to PCnet-FAST III
+    vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
+    vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
+  end
+end`
+
+Cria esse arquivo vagrant-bootstrap.sh no mesmo diretorio que o vagrantfile contendo seu script de instalação das coisas.
+
+`#! /usr/bin/env bash
+echo "Iniciando o provisionamento da maquina..."
+sudo apt-get -qq update
+echo "Instalando o ruby, essentials e git..."
+sudo apt-get -y remove ruby > /dev/null 2>&1
+sudo apt-get -y build-essential libgmp3-dev install ruby-2.3 git > /dev/null 2>&1
+echo "Instalando o mysql..."
+sudo apt-get -y install mysql-server mysql-client libmysqlclient-dev > /dev/null 2>&1
+echo "Definindo a senha do  mysql..."
+mysqladmin -u root password 123456
+echo "Instalando o rails..."
+gem install --no-rdoc --no-ri rails
+echo "Provisionamento concluido com sucesso!"`
+
+Vc pode recarragar o provisionamento com 
+
+`vagrant reload --provision`
+
+
+https://www.vagrantup.com/docs/provisioning/
+https://www.vagrantup.com/docs/provisioning/shell.html
+https://gist.github.com/rrosiek/8190550
