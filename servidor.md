@@ -199,13 +199,15 @@ Se der problema de chave ssh, logue no servidor com o usuario deploy e conecte n
 
 ou
 
-`RAILS_ENV=production; bundle exec rake db:migrate`
+`bundle exec rake db:migrate RAILS_ENV="production"`
 
 ## Rodar o servidor para teste
 
 `cd /var/www/tripolist/current`
 
 `bundle exec rails  s  -e production --binding=162.243.91.163`
+
+`bundle exec rails  s  -e production --binding=0.0.0.0`
 
 ## Configurando o Unicorn
 
