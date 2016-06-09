@@ -27,11 +27,13 @@ bind-address = 0.0.0.0
 
 Reinicie o mysql
 
-`sudo service mysql restart`
+`sudo service mysql restart` ou `/etc/init.d/mysql restart`
 
 Agora, execute o comando abaixo para permitir que o usuário root possa conectar nessa máquina.
 
 `mysql -u root -p -e "CREATE USER 'root'@'%'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"`
+
+Verifique se esta rodando no bind 0.0.0.0 com comando `netstat -plutn`
 
 ## Criando Dumps
 
