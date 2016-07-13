@@ -306,7 +306,7 @@ Para usar o upstart
 
 Os logs do upstart ficam em
 
-`/etc/logs/upstart
+`/var/log/upstart
 
 ## Monit
 
