@@ -1,339 +1,374 @@
 # Montando um servidor
-
+================================
 
 ## Configurando troca de chaves por SSH
+================================================================================================
 
-Logar no servidor e no home do diretório root criar a pasta .ssh caso ela não exista e criar o arquivo authorized_keys dentro dela.
+    Logar no servidor e no home do diretório root criar a pasta .ssh caso ela não exista e criar o arquivo authorized_keys dentro dela.
 
-Dar permissão 700 para o diretório e 600 para o arquivo
+    Dar permissão 700 para o diretório e 600 para o arquivo
 
-`# chmod 700 ~/.ssh`
-`# chmod 600 ~/.ssh/authorized_keys`
+        `# chmod 700 ~/.ssh`
+        `# chmod 600 ~/.ssh/authorized_keys`
 
-Editar o arquivo authorized_keys e colocar a chave publica do seu computador, no meu caso, copiei assim
+    Editar o arquivo authorized_keys e colocar a chave publica do seu computador, no meu caso, copiei assim
 
-`$ cat .ssh/id_rsa.pub | pbcopy`
+        `$ cat .ssh/id_rsa.pub | pbcopy`
 
-ou
+    ou
 
-`$ cat ~/.ssh/id_rsa.pub | ssh root@162.243.78.30 "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"`
+        `$ cat ~/.ssh/id_rsa.pub | ssh root@162.243.78.30 "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"`
 
-Teste, tem que logar sem senha
+    Teste, tem que logar sem senha
 
-`$ ssh root@162.243.78.30 -vvvv`
+        `$ ssh root@162.243.78.30 -vvvv`
+
 
 ## Permitindo que apenas usuarios de um grupo consigam logar na maquina
+================================================================================================
 
-Crie o grupo sshlogin e coloque o usuario root nele.
+    Crie o grupo sshlogin e coloque o usuario root nele.
 
-`$ addgroup sshlogin`
+        `$ addgroup sshlogin`
 
-`$ adduser root sshlogin`
+        `$ adduser root sshlogin`
 
-Edite o arquivo do ssh e configure apenas esse grupo como permitido
+    Edite o arquivo do ssh e configure apenas esse grupo como permitido
 
-`vi /etc/ssh/sshd_config`
+        `vi /etc/ssh/sshd_config`
 
-`AllowGroups sshlogin`
+        `AllowGroups sshlogin`
 
-## Atualizando
 
-`$ apt-get update`
+## Atualizando a distribuição
+================================================================================================
 
-`$ apt-get upgrade`
+    `$ apt-get update`
 
-`$ apt-get autoremove`
+    `$ apt-get upgrade`
 
-## Configurando a sincronia de hora
+    `$ apt-get autoremove`
 
-`$ apt-get install ntp`
+    ## Configurando a sincronia de hora
 
-`$ dpkg-reconfigure tzdata`
+    `$ apt-get install ntp`
+
+    `$ dpkg-reconfigure tzdata`
+
 
 ## Instalando GCC
+================================================================================================
 
-`apt-get install build-essential libgmp3-dev`
+    `apt-get install build-essential libgmp3-dev`
 
 ## Instalando Mysql
+================================================================================================
 
-`apt-get install mysql-server mysql-client libmysqlclient-dev`
+    `apt-get install mysql-server mysql-client libmysqlclient-dev`
 
-Configurar seguranca
+    Configurar seguranca
 
-`mysql_secure_installation`
+        `mysql_secure_installation`
 
-Testando
+    Testando
 
-`mysql -u root -p`
+        `mysql -u root -p`
 
-Criando um BD
+    Criando um BD
 
-`mysql> create database tripolist character set utf8;`
+        `mysql> create database tripolist character set utf8;`
 
-Criando um usuario
+    Criando um usuario
 
-`mysql> grant all on tripolist.* to 'tripolist' identified by 'senha';`
+        `mysql> grant all on tripolist.* to 'tripolist' identified by 'senha';`
 
-`mysql> flush privileges;`
+        `mysql> flush privileges;`
 
 ## Ruby com rvm
+================================================================================================
 
-- https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-ubuntu-14-04-using-rvm
+    - https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-ubuntu-14-04-using-rvm
 
-Rodar o comabdo abaixo para instalar o RVM
+    Rodar o comando abaixo para instalar o RVM
 
-`gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-\curl -sSL https://get.rvm.io | bash -s stable`
+        `gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+        \curl -sSL https://get.rvm.io | bash -s stable`
 
-OBS.: Se você esta usando RVM tem que criar um wrapper para que o usuario www-data consiga enxergar o bundler e o RVM
 
-rvm alias create tripolist ruby-2.3.0@tripolist
+    Criar RVM wrapper:
+        Se você esta usando RVM tem que criar um wrapper para que o usuario www-data consiga enxergar o bundler e o RVM
 
-E depois usar os comandos disponiveis no path
+            rvm alias create tripolist ruby-2.3.0@tripolist
 
-`ls /usr/local/rvm/wrappers/tripolist`
+        E depois usar os comandos disponiveis no path
 
-como
+            `ls /usr/local/rvm/wrappers/tripolist`
 
-`/usr/local/rvm/wrappers/tripolist/bundle exec ...`
+        como
 
-Atualizar o bash
+            `/usr/local/rvm/wrappers/tripolist/bundle exec ...`
 
-`source ~/.rvm/scripts/rvm`
+        Atualizar o bash
 
-Instalar uma versão do ruby
+            `source ~/.rvm/scripts/rvm`
 
-`rvm install 2.3.0`
+        Instalar uma versão do ruby
 
-Criar um gemset para o projeto
+            `rvm install 2.3.0`
 
-`rvm gemset create tripolist`
+        Criar um gemset para o projeto
 
-Instale a gem do bundler globalmente
+            `rvm gemset create tripolist`
 
-`rvm @global do gem install bundler`
+        Instale a gem do bundler globalmente
 
-ou no seu gemset
+            `rvm @global do gem install bundler`
 
-`rvm use "ruby-2.3.0@tripolist" --create`
+        ou no seu gemset
 
-`gem install bundler`
+            `rvm use "ruby-2.3.0@tripolist" --create`
+            `gem install bundler`
 
 
 ## Ruby sem rvm ou rbenv
+================================================================================================
 
-O Nando Vieira mantém um repositório apt contendo o ruby e o nginx
+    O Nando Vieira mantém um repositório apt contendo o ruby e o nginx
 
-- http://apt.hellobits.com/
+    - http://apt.hellobits.com/
 
-`$ apt-get remove ruby`
+        `$ apt-get remove ruby`
+        `$ apt-get -y install ruby-2.3`
+        `$ gem install bundler`
 
-`$ apt-get -y install ruby-2.3`
-
-`$ gem install bundler`
 
 ## Instalando o NginX
+================================================================================================
 
-`$ apt-get install nginx`
+    `$ apt-get install nginx`
 
-Ver se esta rodando
+    Ver se esta rodando
 
-`ps auxwww | grep nginx`
+        `ps auxwww | grep nginx`
+
 
 ## Instalando NodeJs
+================================================================================================
 
-`apt-get install nodejs`
+    `apt-get install nodejs`
+
 
 ## Configuracoes para deploy
+================================================================================================
 
-Criar o usuario para deploy
+    Criar o usuario para deploy
 
-`adduser --ingroup www-data deploy --disabled-password`
+        `adduser --ingroup www-data deploy --disabled-password`
+        `su deploy`
+        `cd`
+        `mkdir .ssh`
+        `touch .ssh/authorized_keys`
+        `chmod 700 .ssh`
+        `chmod 600 .ssh/authorized_keys`
 
-`su deploy`
+    Configurar a chave ssh nesse arquivo e salvar
 
-`cd`
 
-`mkdir .ssh`
+## Caminho do projeto
+================================================================================================
 
-`touch .ssh/authorized_keys`
+    Colocar o projeto em /var/www/projeto vou seguir esse padrão
 
-`chmod 700 .ssh`
-
-`chmod 600 .ssh/authorized_keys`
-
-Configurar a chave ssh nesse arquivo e salvar
-
-Colocar o projeto em /var/www/projeto
 
 # Instalando o GIT
+================================================================================================
 
-`apt-get install git`
+    `apt-get install git`
 
-# configurando o arquivo do mina
 
-Dentro do diretorio do projeto local inicialize o mina para que ele possa criar o arquivo deploy.rb,
-você deve configurar esse arquivo como no projeto tripolist.
+# Configurando o MINA para deploy
+================================================================================================
 
-`mina init`
+    Dentro do diretorio do projeto local inicialize o mina para que ele possa criar o arquivo deploy.rb, você deve configurar esse arquivo como no projeto tripolist.
 
-Depois de configurado rodar o setup para ver se tudo esta legal
+        `mina init`
 
-`mina setup`
+    Depois de configurado rodar o setup para ver se tudo esta legal
 
-E em seguida logar no servidor e configurar os arquivos de database e env que foram criados.
+        `mina setup`
 
-Lembre que se vc usou o arquivo .env tera que ter a gem 'dotenv-rails' no seu GemFile
+    E em seguida logar no servidor e configurar os arquivos de database e env que foram criados.
 
-`mina deploy --verbose`
+    Lembre que se vc usou o arquivo .env tera que ter a gem 'dotenv-rails' no seu GemFile
 
-Se der problema de chave ssh, logue no servidor com o usuario deploy e conecte no seu repositorio git para sincronizar as chaves.
+        `mina deploy --verbose`
 
-`su deploy`
+    Se der problema de chave ssh, logue no servidor com o usuario deploy e conecte no seu repositorio git para sincronizar as chaves.
 
-`$ ssh git@bitbucket.org`
+        `su deploy`
+        `$ ssh git@bitbucket.org`
+
 
 ## Rodar migracoes pelo Mina
+================================================================================================
 
-`mina rails:db_migrate`
+    `mina rails:db_migrate`
 
-ou
 
-`bundle exec rake db:migrate RAILS_ENV="production"`
+## Rodar o servidor para testar se está funcionando
+================================================================================================
 
-## Rodar o servidor para teste
+    Va para o diretório do projeto
 
-`cd /var/www/tripolist/current`
+        `cd /var/www/tripolist/current`
 
-`bundle exec rails  s  -e production --binding=162.243.91.163`
+    Rode o rails com o binding para o IP da maquina ou para 0.0.0.0
 
-`bundle exec rails  s  -e production --binding=0.0.0.0`
+        `bundle exec rails  s  -e production --binding=162.243.91.163`
+        `bundle exec rails  s  -e production --binding=0.0.0.0`
+
 
 ## Configurando o Unicorn
+================================================================================================
 
-Inclua a gem do unicorn no gemfile do projeto e faça o deploy e teste
+    Inclua a gem do unicorn no gemfile do projeto e cpnfigure o arquivo unicorn.rb dentro do projeto. Tem um exemplo desse arquivo no github server-conf
 
-`cd /var/www/tripolist/current`
+    Em seguida, faça deploy e teste
 
-`bundle exec unicorn --env production`
+        `cd /var/www/tripolist/current`
+        `bundle exec unicorn --env production`
 
-ou com um arquivo de configuracao
+    ou usando um arquivo de configuracao
 
-`bundle exec unicorn --env production -c .config/unicorn.rb`
+        `bundle exec unicorn --env production -c .config/unicorn.rb`
 
-ou com www-data
+    ou usando o usuário www-data
 
-`sudo -u www-data sh -c '/usr/local/rvm/wrappers/tripolist/bundle exec unicorn --env production -c .config/unicorn.rb'`
+        `sudo -u www-data sh -c '/usr/local/rvm/wrappers/tripolist/bundle exec unicorn --env production -c .config/unicorn.rb'`
 
 
-Caso você esteja usando unicorn.sock crie o diretiorio /var/run/tripolist e de permissão
+    Caso você esteja usando unicorn.sock crie o diretiorio /var/run/tripolist e de permissão
 
-`mkdir /var/run/tripolist`
-
-`chown www-data. /var/run/tripolist/`
+        `mkdir /var/run/tripolist`
+        `chown www-data. /var/run/tripolist/`
 
 
 # Configurando NginX
+================================================================================================
 
-Configurações globais
+    Defina as configurações globais, temos exemplos desse arquivo no github server-conf
 
-`vi /etc/nginx/nginx.conf`
+        `vi /etc/nginx/nginx.conf`
 
-Configuracoes por projeto
+    As configurações por projeto criamos em sites-enabled
 
-`vi /etc/nginx/sites-enabled/tripolist`
+        `vi /etc/nginx/sites-enabled/tripolist.conf`
 
-Testar sintaxe das configuracoes
+    Testar sintaxe das configuracoes
 
-`nginx -t`
+        `nginx -t`
 
-`/etc/init.d/nginx restart`
+    Reiniciar o NginX
+
+        `/etc/init.d/nginx restart`
 
 
 # Configurando os scripts de inicialização UPSTART
+================================================================================================
 
-Criar um arquivo init geral do projeto
+    Criar um arquivo init geral do projeto
 
-`vim /etc/init/tripolist.conf`
+        `vim /etc/init/tripolist.conf`
 
-Conteudo
+        Conteudo
 
-description "Taskv application"
-start on runlevel [2345]
-stop on runlevel [016]
+            description "Taskv application"
+            start on runlevel [2345]
+            stop on runlevel [016]
 
-pre-start script
-mkdir -p /var/log/taskv
-chown -R www-data /var/log/taskv
+            pre-start script
+            mkdir -p /var/log/taskv
+            chown -R www-data /var/log/taskv
 
-mkdir -p /var/run/taskv
-chown -R www-data /var/run/taskv
-end script
-
-
-Criar um arquivo da aplicacao
-
-`vim /etc/init/tripolist-app.conf`
-
-Conteudo
-
-description "tripolist application server"
-start on starting tripolist
-stop on stopping tripolist
-chdir /var/www/tripolist/current
-respawn
-exec sudo -u www-data sh -c '/usr/local/rvm/wrappers/tripolist/bundle exec unicorn --env production -c ./config/unicorn.rb >> /var/log/tripolist/unicorn.log 2>&1'
+            mkdir -p /var/run/taskv
+            chown -R www-data /var/run/taskv
+            end script
 
 
-OBS.: Se você esta usando RVM tem que criar um wrapper para que o usuario www-data consiga enxergar o bundler e o RVM
+    Criar um arquivo com o start servidor de aplicação
 
-`rvm alias create tripolist ruby-2.3.0@tripolist`
+        `vim /etc/init/tripolist-unicorn.conf`
 
-E depois usar os comandos disponiveis no path
+        Conteudo
 
-`ls /usr/local/rvm/wrappers/tripolist`
+            description "tripolist application server"
+            start on starting tripolist
+            stop on stopping tripolist
+            chdir /var/www/tripolist/current
+            respawn
+            exec sudo -u www-data sh -c '/usr/local/rvm/wrappers/tripolist/bundle exec unicorn --env production -c ./config/unicorn.rb >> /var/log/tripolist/unicorn.log 2>&1'
 
-como
 
-`/usr/local/rvm/wrappers/tripolist/bundle exec ...`
+        OBS.: Se você esta usando RVM tem que criar um wrapper para que o usuario www-data consiga enxergar o bundler e o RVM
 
-Para usar o upstart
+            `rvm alias create tripolist ruby-2.3.0@tripolist`
 
-`start tripolist`
-`status tripolist`
-`stop tripolist`
-`restart tripolist`
+        E depois usar os comandos disponiveis no path
 
-Os logs do upstart ficam em
+            `ls /usr/local/rvm/wrappers/tripolist`
 
-`/var/log/upstart
+        como
+
+        `/usr/local/rvm/wrappers/tripolist/bundle exec ...`
+
+
+    Para usar o upstart
+
+        `start tripolist`
+        `status tripolist`
+        `stop tripolist`
+        `restart tripolist`
+
+    Os logs do upstart ficam em
+
+        `/var/log/upstart
 
 ## Monit
+================================================================================================
 
-O Monit serve para monitorar processos e tomar ações em casos de erro. Nesse caso usaremos para monitorar um arquivo
-que atualizaremos sempre que fizermos o deploy com o mina. Quando a data mudar o monit irá reiniciar o unicorn.
+    O Monit serve para monitorar processos e tomar ações em casos de erro. Nesse caso usaremos para monitorar um arquivo
+    que atualizaremos sempre que fizermos o deploy com o mina. Quando a data mudar o monit irá reiniciar o unicorn.
 
-Ver receita do monit
+    Ver receita do monit
 
 ## Elastic Search
+================================================================================================
 
-Full text search, ver receita do elastic search
+    Full text search, ver receita do elastic search
+
 
 ## Configurando DNS
+================================================================================================
 
 - https://www.digitalocean.com/community/tutorials/how-to-set-up-a-host-name-with-digitalocean
 
-## Configurando firewall
 
-Usar o UFW para gerenciar o firewall, ver receita o ufw
+## Configurando firewall
+================================================================================================
+
+    Usar o UFW para gerenciar o firewall, ver receita o ufw
+
 
 # Backup de MySql com automysqlbackup
+================================================================================================
 
-Faz backup automatico do mysql, ver receita do automysqlbackup
+    Faz backup automatico do mysql, ver receita do automysqlbackup
+
 
 # LogWatch
+================================================================================================
 
-Manda um relatorio diario do servidor, ver receita do logwatch
+    Manda um relatorio diario do servidor, ver receita do logwatch
 
 
 
