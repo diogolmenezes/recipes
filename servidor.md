@@ -369,6 +369,3 @@
 ================================================================================================
 
     Manda um relatorio diario do servidor, ver receita do logwatch
-
-
-
