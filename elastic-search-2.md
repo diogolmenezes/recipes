@@ -90,23 +90,23 @@ Remove o documento do tipo caso ele exista, ou NOT FOUND 404, caso contrário.
 
 ### Busca no indice sem filtros
 
-GET /indice/tipo/_search
+`GET /indice/tipo/_search`
 
 Ainda que o ElasticSearch seja orientado a documentos, é possível retornar apenas uma parte do documento. Para tal, basta adicionar ?_source=atributo 1,atributo 2. Note que podemos ainda utilizar o parâmetro pretty para retornar o documento formatado. Exemplo: GET /catalogo/pessoas/1?pretty&_source=interesses
 
 A busca sem parametros usa o campo _all que é o campo que o elastic search coloca todos os termos do documento juntos para facilitar a busca
 
-GET /indice/tipo/_search?q=futebol
+`GET /indice/tipo/_search?q=futebol`
 
-GET /indice/tipo/_search?q=_all:futebol
+`GET /indice/tipo/_search?q=_all:futebol`
 
-GET /indice/tipo/_search?q=nome:João&estado=RJ
+`GET /indice/tipo/_search?q=nome:João&estado=RJ`
 
 ### Limitando o tamanho da busca e paginação
 
-GET /indice/tipo/_search?q=nome:João&size=10
+`GET /indice/tipo/_search?q=nome:João&size=10`
 
-GET /indice/tipo/_search?q=nome:João&from=10&size=10
+`GET /indice/tipo/_search?q=nome:João&from=10&size=10`
 
 Importante: Paginação deve ser usada apenas para pequenos volumes de dados, como alguns poucos milhares. Para volumes maiores, devemos utilizar a abordagem da API scroll.
 
@@ -139,7 +139,7 @@ $ service elasticsearch restart
 
 Para acessar um plugin do ES, basta inserir o nome do plugin na URL como por exemplo:
 
-http://localhost:9200/_plugin/kopf/
+`http://localhost:9200/_plugin/kopf/`
 
 
 
