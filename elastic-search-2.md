@@ -55,14 +55,14 @@ Importante: Uma vez que um documento é criado em uma instância do ElasticSearc
 
 GET /indice/tipo/identificator
 
-```http://localhost:9200/catalogo/pessoas/1```
+`http://localhost:9200/catalogo/pessoas/1`
 
 ## HEAD
 
 A operação de HEAD é similar a um select 1 from table where id = 1, e serve para saber se um
 documento existe. Retornando um 200 ou um 404.
 
-```$ curl -XHEAD -v http://localhost:9200/catalogo/pessoas/1```
+`$ curl -XHEAD -v http://localhost:9200/catalogo/pessoas/1`
 
 ## PUT /index/type/id
 
@@ -84,7 +84,7 @@ Remove o documento do tipo caso ele exista, ou NOT FOUND 404, caso contrário.
 
 ## Contando documentos
 
-```http://localhost:9200/indice/tipo/_count```
+`http://localhost:9200/indice/tipo/_count`
 
 ## Busca
 
