@@ -13,6 +13,21 @@
 
 `meu-projeto$ vagrant up`
 
+## Definindo um nome para a maquina
+
+No VagrantFile
+
+```
+  config.vm.define :nome do |nome_config|
+  end
+```
+
+## Definindo um IP para a maquina
+
+No VagrantFile
+
+`config.vm.network :private_network, ip: "192.168.33.101"`
+
 ## Diretorio sincronizado
 
 O vagrant por padrao compartilha os dados do diretório /Vagrant
