@@ -261,6 +261,7 @@ Lembrando que as palavras so sinonimo devem ser as retornadas peelo analyser por
 
 PUT /indice_com_sinonimo_2
 
+```
 {
   "settings": {
     "index": {
@@ -343,6 +344,7 @@ PUT /indice_com_sinonimo_2
     }
   }
 }
+```
 
 ## Arquivo de sinonimos
 
@@ -384,6 +386,7 @@ O ElasticSearch irá criar um campo chamado nome.original e manterá uma cópia 
 
 # Indice completo para exemplo
 
+```
 PUT /pessoas
 {
   "settings": {
@@ -492,6 +495,7 @@ PUT /pessoas
     }
   }
 }
+```
 
 # Bulk insert de dados
 
@@ -501,10 +505,12 @@ Por questão de simplicidade, vamos focar no que precisamos para atingir nossos 
 
 POST para /indice/tipo/_bulk
 
+```
 {"create": {}}
 {"nome": "Diogo Menezes", "idade": 31}
 {"create": {}}
 {"nome": "Maria da Silva", "idade": 20}
+```
 
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
