@@ -7,7 +7,6 @@ http://docker.com/
 $ sudo docker start container
 $ sudo docker stop container
 
-
 ## Listando imagens
 
 $ sudo docker images
@@ -15,6 +14,10 @@ $ sudo docker images
 ## Listando Containers
 
 $ sudo docker ps -a
+
+## Listando volumes
+
+$ sudo docker volume ls
 
 ## Removendo
 
@@ -24,10 +27,8 @@ $ sudo docker rm container
 
 $ sudo docker exec -it container bash
 
-
 ## Logs
 
 Para ver os logs, escritos no output do container
 
 $ sudo docker logs -f container
-
