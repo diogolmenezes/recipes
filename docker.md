@@ -39,6 +39,12 @@ $ docker ps -a
 
 $ docker volume ls
 
+## Criando volumes
+
+Mapeia o diretorio atual para o /tmp do container.
+
+$ docker run -it -v $(pwd):/tmp ubuntu 
+
 ## Removendo
 
 $ docker rm container
@@ -50,6 +56,27 @@ $ docker rm $(docker ps -qa)
 ## Acessando o container
 
 $ docker exec -it container bash
+
+## Inspecionando o container
+
+Retorna informações sobre o container, inclusive seu IP (GateWay)
+
+$ docker inspect container
+
+Saber o IP permite que você por exemplo faça um ping de um container para o outro, ou então acesse um determinado serviço que esteja rodando 
+no outro container, como por exemplo um mysql.
+
+Vamos supor que subimos um container de mysql
+
+$ docker run --name banco -e MYSQL_ROOT_PASSWORD=test123 -p 3306:3306 mysql -d
+
+E que após inspecioner vimos que o IP do container mysql é 123.123.123.123. Podemos poingar ou acessar esse container através de um outro container.
+
+$ docker run -rm -it ubuntu bash
+
+root@ubuntu# ping 123.123.123.123
+root@ubuntu# apt-get install -y mysql-client
+root@ubuntu# mysql -h 123.123.123.123 -u root -p
 
 ## Comitando uma nova imagem
 
@@ -110,6 +137,8 @@ subiremos um  container de banco e outro de aplicação. Salvar como docker-comp
 
     nome_container_banco:
         image: mysql
+        volumes:
+            -  ~/database_mysql:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=test123
 
@@ -129,3 +158,7 @@ Subindo o compose criado:
 ## Listando os processos criados como compose
 
 $ docker-compose ps
+
+## Removendo os containers com compose
+
+$ docker-compose rm
