@@ -39,6 +39,11 @@
     
     sudo /etc/init.d/filebeat start
 
+## Iniciando o filebeat como debug
+
+    cd /bin 
+    sudo filebeat.sh -e 
+
 ## Documentação
     
     https://www.elastic.co/products/beats/filebeat
