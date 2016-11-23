@@ -7,7 +7,9 @@
 
 ## Logar
 
-`mongo -u "usuario" -p "senha" --authenticationDatabase "admin" host:27017`
+```shell
+mongo -u "usuario" -p "senha" --authenticationDatabase "admin" host:27017
+```
 
 ## Status do servidor
 
