@@ -23,6 +23,22 @@ db.getCollection('colecao').find({
 })
 ```
 
+# Distinct
+
+```javascript
+db.getCollection('colecao').distinct('cpf')
+```
+
+## Distinct com count
+
+```javascript
+db.getCollection('colecao').distinct('cpf', {
+    $or: [{ statusCadastro: 1}, { statusCadastro: 2}],
+    dataAlteracao: { $gte: ISODate('2015-12-31'), $lte: ISODate('2016-12-31') } 
+}).length
+```
+
+
 # Agrupamentos
 
 ## Group + Having
