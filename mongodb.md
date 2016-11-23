@@ -1,34 +1,47 @@
 # MongoDb
 
+# IDE
+
+- https://www.mongodb.com/products/compass
+- https://robomongo.org/
+
 ## Logar
 
-mongo -u "usuario" -p "senha" --authenticationDatabase "admin" host:27017
+`mongo -u "usuario" -p "senha" --authenticationDatabase "admin" host:27017`
+
+## Status do servidor
+
+`db.serverStatus()`
+
+## Informações do host
+
+`db.hostInfo()`
 
 ## Numero de conexões
 
-    var status = db.serverStatus()
-    status.connections
+```var status = db.serverStatus()
+status.connections```
 
 # Replicações
 
 ## Status de todas as replicações
 
-    rs.status();
+`rs.status();`
 
 ## Status da replica a partir do primario
 
-    rs.printReplicationInfo();
+`rs.printReplicationInfo();`
 
 ## Status da replica a partir dos secundarios
     
-    rs.printSlaveReplicationInfo();
+`rs.printSlaveReplicationInfo();`
 
 ## Muda o primario
 
 Faz o primario virar secundário
 
-    rs.stepDown()
+`rs.stepDown()`
 
 ## Devolve as configurações do replicaset
 
-    rs.conf();
+`rs.conf();`
