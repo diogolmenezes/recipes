@@ -6,12 +6,16 @@ Exemplos de consultas no mongo
 
 Use 1 para ASC e -1 para DESC
 
-`{ $sort: { statusCadastro: 1, dataAlteracao: -1 } }`
+```javascript
+{ $sort: { statusCadastro: 1, dataAlteracao: -1 } }
+```
 
 
 ## Select + In
 
-`select ... from ... where cpf in ('00000000000', '11111111111')`
+```sql
+select ... from ... where cpf in ('00000000000', '11111111111')
+```
 
 ```javascript
 db.getCollection('colecao').find({ 
@@ -23,7 +27,9 @@ db.getCollection('colecao').find({
 
 ## Group + Having
 
-`select ... from ... group by cpf having count > 1`
+```sql
+select ... from ... group by cpf having count > 1
+```
 
 ```javascript
 db.getCollection('colecao').aggregate([
