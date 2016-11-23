@@ -6,16 +6,18 @@ Exemplos de consultas no mongo
 
 Use 1 para ASC e -1 para DESC
 
-`{ $sort: { statusCadastro: 1, dataAlteracao: -1 } },`
+`{ $sort: { statusCadastro: 1, dataAlteracao: -1 } }`
 
 
 ## Select + In
 
 `select ... from ... where cpf in ('00000000000', '11111111111')`
 
-```db.getCollection('colecao').find({ 
+```javascript
+db.getCollection('colecao').find({ 
    cpf:  { $in: ['00000000000', '11111111111'] }
-})```
+})
+```
 
 # Agrupamentos
 
@@ -23,7 +25,8 @@ Use 1 para ASC e -1 para DESC
 
 `select ... from ... group by cpf having count > 1`
 
-```db.getCollection('colecao').aggregate([
+```javascript
+db.getCollection('colecao').aggregate([
     { $sort: { statusCadastro: 1, dataAlteracao: 1 } },
     {
         $group: {
@@ -36,13 +39,15 @@ Use 1 para ASC e -1 para DESC
             count: { $gt: 1 }
         }
     }
-])```
+])
+```
 
 ## 2 grupos aninhados
 
 Agrupando por CPF depois por status. Contando total de cpfs por status sem replicação.
 
-```db.getCollection('colecao').aggregate([
+```javascript
+db.getCollection('colecao').aggregate([
     { $sort: { statusCadastro: 1, dataAlteracao: 1 } },
     {
         $group: {
@@ -56,4 +61,5 @@ Agrupando por CPF depois por status. Contando total de cpfs por status sem repli
             count: { $sum: 1 }
         }
     }
-])```
+])
+```
