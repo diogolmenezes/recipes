@@ -11,37 +11,53 @@
 
 ## Status do servidor
 
-`db.serverStatus()`
+```javascript
+db.serverStatus()
+```
 
 ## Informações do host
 
-`db.hostInfo()`
+```javascript
+db.hostInfo()
+```
 
 ## Numero de conexões
 
-```var status = db.serverStatus()
-status.connections```
+```javascript
+var status = db.serverStatus()
+status.connections
+```
 
 # Replicações
 
 ## Status de todas as replicações
 
-`rs.status();`
+```javascript
+rs.status();
+```
 
 ## Status da replica a partir do primario
 
-`rs.printReplicationInfo();`
+```javascript
+rs.printReplicationInfo();
+```
 
 ## Status da replica a partir dos secundarios
     
-`rs.printSlaveReplicationInfo();`
+```javascript
+rs.printSlaveReplicationInfo();
+```
 
 ## Muda o primario
 
 Faz o primario virar secundário
 
-`rs.stepDown()`
+```javascript
+rs.stepDown()
+```
 
 ## Devolve as configurações do replicaset
 
-`rs.conf();`
+```javascript
+rs.conf();
+```
