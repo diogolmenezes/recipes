@@ -63,3 +63,9 @@ rs.stepDown()
 ```javascript
 rs.conf();
 ```
+
+## Conectar em um slave
+
+```javascript
+mongodb://host:27017/banco?readPreference=secondary
+```
