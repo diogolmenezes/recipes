@@ -25,6 +25,14 @@ $ docker images
 
 $ docker rmi imagem
 
+## Salvando uma imagem
+
+$ socker save -o imagem.tar imagem
+
+## Carregando uma imagem Salvar
+
+$ socker load --input imagem.tar
+
 ## Compartilhando portas
 
 Compartilha a porta do container no host. -p host: container
