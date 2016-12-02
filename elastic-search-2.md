@@ -15,6 +15,10 @@ Coluna    x Atributo
 
 `$ curl 'localhost:9200/_cat/indices?v' `
 
+## Excluindo indices
+
+`curl -X "DELETE" http://localhost:9200/nome-indice`
+
 ## Criando indices
 
 Caso um indice nao seja explicitamente definido, o ES infere os tipos na hora da criacao do documento.
