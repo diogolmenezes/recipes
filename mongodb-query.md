@@ -2,6 +2,63 @@
 
 Exemplos de consultas no mongo
 
+## Criando colecoes
+
+```javascript
+db.createCollection("alunos")
+```
+
+## Inserindo
+
+```javascript
+db.alunos.insert({
+    nome: 'Diogo',
+    data_nascimento: new Date(1985, 4, 2),
+    habilidades: [
+        {
+            nome: "ingles",
+            nivel: "avancado"
+        },
+        {
+            nome: "corrida",
+            nivel: "iniciante"
+        }
+    ]
+})
+```
+
+## Removendo
+
+```javascript
+db.alunos.remove({
+    _id: ObjectId('9803982983298ssdklj')
+})
+```
+
+```javascript
+db.alunos.remove({
+    nome: 'Diogo'
+})
+```
+
+## Listando
+
+```javascript
+db.alunos.find({})
+```
+
+```javascript
+db.alunos.find({ nome: 'Diogo' })
+```
+
+## Pretty
+
+Deixa o output da query mais amigavel
+
+```javascript
+db.alunos.find().pretty()
+```
+
 ## Ordenação
 
 Use 1 para ASC e -1 para DESC

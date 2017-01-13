@@ -5,6 +5,12 @@
 - https://www.mongodb.com/products/compass
 - https://robomongo.org/
 
+## Iniciando servidor com um caminho especifico para o banco de dados
+
+```shell
+mongod --dbpath /home/usuario/pasta
+```
+
 ## Logar
 
 ```shell
