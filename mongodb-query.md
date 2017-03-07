@@ -2,6 +2,19 @@
 
 Exemplos de consultas no mongo
 
+## Queries sem os objetos do mongoose (+performance)
+
+- http://www.tothenew.com/blog/high-performance-find-query-using-lean-in-mongoose-2/
+- http://mongoosejs.com/docs/api.html#query_Query-lean
+
+Documentos retornados de consultas com a opção lean habilitada são objetos javascript simples, não documentos Mongoose. 
+Eles não têm nenhum método save, getters / setters ou outra magia de mongoose aplicada.
+
+```javascript
+db.alunos.find({}).lean()
+```
+
+
 ## Criando colecoes
 
 ```javascript
