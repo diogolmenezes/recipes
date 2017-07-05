@@ -75,3 +75,7 @@ rs.conf();
 ```javascript
 mongodb://host:27017/banco?readPreference=secondary
 ```
+
+# Shards (Balance)
+
+- https://docs.mongodb.com/v3.2/tutorial/convert-replica-set-to-replicated-shard-cluster/
