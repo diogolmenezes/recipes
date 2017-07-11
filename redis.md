@@ -2,6 +2,13 @@
 
 Redis é um banco de dados em memória que pode ser utilizado como cache, fila e etc.
 
+- https://redis.io/
+- https://redis.io/commands
+
+## Testar online
+
+- http://try.redis.io/
+
 ## Inserindo strings
 
 `SET resultado:megasena:20-05-2017 10,20,30,40,50,60`
@@ -33,6 +40,8 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 `KEYS "resultado:megasena:[23]?-05-2017"`
 
 ## Inserindo hashs
+
+Interessante quando queremos agrupar valores
 
 `HSET sessao:usuario:1234 "nome" "Diogo"`
 
@@ -87,5 +96,28 @@ Removendo 20.30 a chave de forma atomica.
 
 `DECRBYFLOAT compras:10-05-2017:valor 20.30`
 
+## Inserindo Bits
 
+Interessante para guardar boleanos, flags de usuarios por exemplo
 
+Indicando que o usuario 23, 24, 30 acessou
+
+`SETBIT acesso:20-05-2017 23 1`
+
+`SETBIT acesso:20-05-2017 24 1`
+
+`SETBIT acesso:20-05-2017 30 1`
+
+## Recuperando Bits
+
+Verificando se o usuario 23, 90 acessaram
+
+`GETBIT acesso:20-05-2017 23`
+
+`GETBIT acesso:20-05-2017 90`
+
+## Contrando numero de Bits
+
+Contando quantos acessos tivemos no dia
+
+`BITCOUNT acesso:20-05-2017`
