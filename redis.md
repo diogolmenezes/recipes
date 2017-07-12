@@ -9,6 +9,10 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 
 - http://try.redis.io/
 
+## Redis on docker
+
+- https://hub.docker.com/_/redis/
+
 ## Listando
 
 ### Usando * ? ou [] para filtrar
@@ -133,9 +137,53 @@ Contando quantos acessos tivemos no dia
 
 `BITCOUNT acesso:20-05-2017`
 
-## Listas
+## Listas e filas
+
+Listas são mais usadas para listagens de noticas mais recentes por exemplo. Já as filas para processamentos em background.
 
 ### Inserindo em Listas
 
+No inicio Left
+
 `LPUSH lista_noticias "noticia"`
+
+### Tamanho da lista_noticias
+
+`LLEN lista_noticias`
+
+### Listando elementos da lista_noticias
+
+Lista os 3 primeiros elementos da lista
+
+`LRANGE lista_noticias 0 2`
+
+### Reduzindo uma lista com TRIM
+
+Mantendo apenas as 3 notícias mais recentes
+
+`LTRIM lista_noticias 0 2`
+
+### Pega um elemento da lista
+
+Retorna o primeiro elemento
+
+`LINDEX lista_noticias 0`
+
+### Inserindo em filas
+
+Como é uma estrutura de fila é importante sempre incluirmos no final e excluirmos no inicio, assim o mais antigo da fila é sempre tratado primeiro.
+
+`RPUSH fila:confirmacao_email "diogolmenezes@gmail.com"`  
+
+### Tirando da fila garantindo atomicidade
+
+Tira e devolve o primeiro elemento da lista em uma só operação
+
+`LPOP fila:confirmacao_email`
+
+Tira e devolve o ultimo elemento da lista em uma só operação
+
+`RPOP fila:confirmacao_email`
+
+
 
