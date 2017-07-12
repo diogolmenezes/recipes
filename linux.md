@@ -4,8 +4,16 @@
 
 ## Memoria livre
 
-`free -m` ou `free -h
+`free -m` ou `free -h`
 
+## Partiçoes
+
+`df -kh`
+
+## Tamanho de um diretorio
+
+`cd /`
+`du -ah`
 
 ## Sudo sem senha
 
