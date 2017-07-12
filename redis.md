@@ -9,27 +9,11 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 
 - http://try.redis.io/
 
-## Inserindo strings
-
-`SET resultado:megasena:20-05-2017 10,20,30,40,50,60`
-
-## Inserindo varias strings
-
-`MSET resultado:megasena:20-05-2017 10,20,30,40,50,60 resultado:megasena:21-05-2017 11,33,30,40,50,62`
-
-## Recuperando strings
-
-`GET resultado:megasena:20-05-2017`
-
-## Excluindo strings
-
-`DEL resultado:megasena:20-05-2017`
-
 ## Listando
 
-`KEYS *`
+### Usando * ? ou [] para filtrar
 
-## Usando * ? ou [] para filtrar
+`KEYS *`
 
 `KEYS "resultado*"`
 
@@ -39,35 +23,60 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 
 `KEYS "resultado:megasena:[23]?-05-2017"`
 
-## Inserindo hashs
+
+## Expiração
+
+### Definindo uma espiração TTL em segundos
+
+`EXPIRE sessao:usuario:1234 60`
+
+### Verificando quanto tempo falta para expirar
+
+`TTL sessao:usuario:1234`
+
+## Strings
+
+### Inserindo strings
+
+`SET resultado:megasena:20-05-2017 10,20,30,40,50,60`
+
+### Inserindo varias strings
+
+`MSET resultado:megasena:20-05-2017 10,20,30,40,50,60 resultado:megasena:21-05-2017 11,33,30,40,50,62`
+
+### Recuperando strings
+
+`GET resultado:megasena:20-05-2017`
+
+### Excluindo strings
+
+`DEL resultado:megasena:20-05-2017`
+
+## Hashs
 
 Interessante quando queremos agrupar valores
+
+### Inserindo hashs
 
 `HSET sessao:usuario:1234 "nome" "Diogo"`
 
 `HSET sessao:usuario:1234 "notificacoes" "5"`
 
-## Inserindo varios hashs
+### Inserindo varios hashs
 
 `HMSET sessao:usuario:1234 "nome" "Diogo" "notificacoes" 5`
 
-## Recuperando hashs
+### Recuperando hashs
 
 `HGET sessao:usuario:1234 "nome"`
 
-## Excluindo hash 
+### Excluindo hash 
 
 `HDEL sessao:usuario:1234 "nome"`
 
-## Definindo uma espiração TTL em segundos
+## Incrementos
 
-`EXPIRE sessao:usuario:1234 60`
-
-## Verificando quanto tempo falta para expirar
-
-`TTL sessao:usuario:1234`
-
-## Fazendo incrementos de forma atomica
+### Fazendo incrementos de forma atomica
 
 Adicionando 1 a chave de forma atomica.
 
@@ -81,7 +90,7 @@ Adicionando 20.30 a chave de forma atomica.
 
 `INCRBYFLOAT compras:10-05-2017:valor 20.30`
 
-## Fazendo decrementos de forma atomica
+### Fazendo decrementos de forma atomica
 
 Removendo 1 a chave de forma atomica.
 
@@ -96,7 +105,9 @@ Removendo 20.30 a chave de forma atomica.
 
 `DECRBYFLOAT compras:10-05-2017:valor 20.30`
 
-## Inserindo Bits
+## Bits
+
+### Inserindo Bits
 
 Interessante para guardar boleanos, flags de usuarios por exemplo
 
@@ -108,7 +119,7 @@ Indicando que o usuario 23, 24, 30 acessou
 
 `SETBIT acesso:20-05-2017 30 1`
 
-## Recuperando Bits
+### Recuperando Bits
 
 Verificando se o usuario 23, 90 acessaram
 
@@ -116,8 +127,15 @@ Verificando se o usuario 23, 90 acessaram
 
 `GETBIT acesso:20-05-2017 90`
 
-## Contrando numero de Bits
+### Contrando numero de Bits
 
 Contando quantos acessos tivemos no dia
 
 `BITCOUNT acesso:20-05-2017`
+
+## Listas
+
+### Inserindo em Listas
+
+`LPUSH lista_noticias "noticia"`
+
