@@ -38,6 +38,12 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 
 `TTL sessao:usuario:1234`
 
+## Tipos
+
+### Verificando o tipo de uma chave
+
+`TYPE resultado:megasena:20-05-2017`
+
 ## Strings
 
 ### Inserindo strings
@@ -72,7 +78,13 @@ Interessante quando queremos agrupar valores
 
 ### Recuperando hashs
 
+Retorna apenas o nome
+
 `HGET sessao:usuario:1234 "nome"`
+
+Retorna todas as informações do usuario
+
+`HGETALL sessao:usuario:1234 "nome"`
 
 ### Excluindo hash 
 
@@ -90,9 +102,13 @@ Adicionando 15 a chave de forma atomica.
 
 `INCRBY compras:10-05-2017:valor 15`
 
+`HINCRBY jogador:1 pontos 15`
+
 Adicionando 20.30 a chave de forma atomica.
 
 `INCRBYFLOAT compras:10-05-2017:valor 20.30`
+
+`HINCRBYFLOAT jogador:1 dinheiro 20.30`
 
 ### Fazendo decrementos de forma atomica
 
@@ -104,10 +120,14 @@ Removendo 15 a chave de forma atomica.
 
 `DECRBY compras:10-05-2017:valor 15`
 
+`HDECRBY jogador:1 pontos 15`
+
 
 Removendo 20.30 a chave de forma atomica.
 
 `DECRBYFLOAT compras:10-05-2017:valor 20.30`
+
+`HDECRBYFLOAT jogador:1 pontos 20.30`
 
 ## Bits
 
@@ -185,5 +205,84 @@ Tira e devolve o ultimo elemento da lista em uma só operação
 
 `RPOP fila:confirmacao_email`
 
+Aguarda por 30 segundos tentando dar um POP dessa forma não precisamos ficar chamando o POP varias vezes quando a lista esta vazia
 
+`BLPOP fila:confirmacao_email 30`
 
+Aguarda indeterminadamente ate alguem chegar
+
+`BLPOP fila:confirmacao_email 0`
+
+## Conjuntos sem ordem
+
+Podemos por exemplo criar conjuntos de amigos
+
+### Inserindo em um conjunto 
+
+`SADD amigos:diogo "joao" "maria" "ana"`
+
+### Removendo do conjunto
+
+`SREM amigos:diogo maria`
+
+### Tamanho ou cardinalidde do conjunto
+
+`SCARD amigos:diogo`
+
+### Conteudo do conjunto
+
+`SMEMBERS amigos:diogo`
+
+### Verificando se elemento esta em um conjunto
+
+`SISMEMBER amigos:diogo ana`
+
+### Interseção de conjuntos
+
+Amigos em comum do diogo com a beatriz
+
+`SADD amigos:diogo   "joao" "maria" "ana"`
+
+`SADD amigos:beatriz "joao" "otavio" "ana"`
+
+`SINTER amigos:diogo amigos:beatriz`
+
+### Diferença de conjuntos
+
+Populando os amigos
+
+`SADD amigos:diogo   "joao" "maria" "ana"`
+
+`SADD amigos:beatriz "joao" "otavio" "ana"`
+
+Amigos do diogo que a beatriz não conhece
+
+`SDIFF amigos:diogo amigos:beatriz`
+
+Amigos da beatriz que o diogo não conhece
+
+`SDIFF amigos:beatriz amigos:diogo`
+
+## Conjuntos com ordem
+
+### Incluindo no conjunto ordenado 
+
+`ZADD pontuacoes 20540 diogo`
+
+`ZADD pontuacoes 1540 joao`
+
+`ZADD pontuacoes 28540 luana`
+
+### Tamanho ou cardinalidde do conjunto ordenado
+
+`ZCARD pontuacoes`
+
+### Conteudo do conjunto ordenado
+
+3 mais bem colocados
+
+`ZREVRANGE pontuacoes 0 3 WITHSCORES`
+
+3 mais mal colocados
+
+`ZRANGE pontuacoes 0 3`
