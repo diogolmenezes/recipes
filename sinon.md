@@ -2,6 +2,22 @@
 
 - http://sinonjs.org/
 
+## Usando sandbox
+
+```javascript
+// Dessa forma podemos criar os spys e stubs direto no sandbox e não precisaremos mais do restore.
+var sandbox = null;
+
+beforeEach(() => {
+    sandbox = sinon.sandbox.create();
+});
+
+afterEach(() => {
+    sandbox.restore();
+});
+
+```
+
 ## Stubs
 
 ### Testando controllers
@@ -48,6 +64,21 @@ it('xxxx', function (done) {
 
 ```
 
+### Retornando valores com yields para stubs que usam callbacks
+
+```javascript
+ it('Erro', function (done) {
+    var cpf = '09166953790';
+    var erro = 'Um erro qualquer';
+    var stub = sinon.stub(consultarCadastroClienteSSO.soap, 'createClient').yields(erro, null);
+    var logSpy = sinon.spy(consultarCadastroClienteSSO.logger, 'logarErro');
+    consultarCadastroClienteSSO.consultar(cpf, function (err, response) {
+        expect(logSpy.calledOnce).to.be.ok;
+        expect(err).to.be.equal(erro);
+        done();
+    });
+});
+```
 
 ### Retornando valores com callsArgWith para stubs que usam callbacks
 
