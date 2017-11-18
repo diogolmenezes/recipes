@@ -2,6 +2,14 @@
 
 http://docker.com/
 
+## Docker sem precisar de root
+
+```bash
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+newgrp docker
+```
+
 ## Iniciando a partir de uma imagem
 
 O parametro -d roda em background o container
