@@ -25,6 +25,10 @@ $ docker images
 
 $ docker rmi imagem
 
+## Removendo todas as imagens
+
+$ docker image prune
+
 ## Salvando uma imagem
 
 $ docker save -o imagem.tar imagem
@@ -59,11 +63,21 @@ $ docker rm container
 
 ## Removendo todos os containers
 
+O Prune remove os inativos
+
+$ docker container prune
+
+ou 
+
 $ docker rm $(docker ps -qa)
 
 ## Acessando o container
 
 $ docker exec -it container bash
+
+ou 
+
+$ docker start -a -i container
 
 ## Inspecionando o container
 
