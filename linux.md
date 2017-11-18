@@ -12,6 +12,14 @@ Mata o processo que está escutando a porta 3000
 
 `fuser 3000/tcp -k`
 
+## Docker sem precisar de root
+
+```bash
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+newgrp docker
+```
+
 ## Listar aplicacoes que mais usam memoria
 
 `ps aux --sort -rss | head`
