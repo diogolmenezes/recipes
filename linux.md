@@ -1,4 +1,18 @@
-## Listar aplicacoes que mais consimem memoria
+# Linux
+
+Dicas e comandos  do linux
+
+## Descubrir que processo está usando a porta
+
+Ve o PID do processo que está escutando a porta 3000
+
+`fuser 3000/tcp`
+
+Mata o processo que está escutando a porta 3000
+
+`fuser 3000/tcp -k`
+
+## Listar aplicacoes que mais usam memoria
 
 `ps aux --sort -rss | head`
 
@@ -27,7 +41,7 @@ colocar:
 
 `$ sudo update-alternatives --config editor`
 
-# Criar atalhos
+## Criar atalhos
 
 Crie o arquivo .desktop dessa forma
 
@@ -38,7 +52,7 @@ Crie o arquivo .desktop dessa forma
     Icon=/home/diogomenezes/Documentos/Postman/icon.png
     Categories=Development
 
-Depois salve no desktop ou em 
+Depois salve no desktop ou em:
 
     /usr/share/applications
     ~/.local/share/applications
