@@ -2,6 +2,16 @@
 
 Dicas e comandos  do linux
 
+## Yum
+
+Lista de repositorios
+
+yum repolist
+
+Repositorios ficam em 
+
+/etc/yum.repos.d
+
 ## Descubrir que processo está usando a porta
 
 Ve o PID do processo que está escutando a porta 3000
