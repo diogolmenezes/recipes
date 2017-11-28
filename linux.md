@@ -4,6 +4,10 @@ Dicas e comandos  do linux
 
 ## Yum
 
+Procura por um pacote que possua o comando
+
+yum provides /usr/bin/ab
+
 Lista de repositorios
 
 yum repolist
