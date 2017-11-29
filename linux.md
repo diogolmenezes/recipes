@@ -2,6 +2,10 @@
 
 Dicas e comandos  do linux
 
+# PenDrive
+
+sudo yum install ntfs-3g
+
 ## Yum
 
 Procura por um pacote que possua o comando
