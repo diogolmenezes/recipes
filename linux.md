@@ -81,4 +81,7 @@ Crie o arquivo .desktop dessa forma
 Depois salve no desktop ou em:
 
     /usr/share/applications
+
     ~/.local/share/applications
+
+Ao salvar em /usr/share/applications a aplicação passa a ficar disponivel para ser incluida no favoritos do CentOs. Lembre de colocar o owner do .dektop como root e o grupo também.
