@@ -15,8 +15,7 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 
 ## Client de Redis rodando em  Docker
 
-`docker run --rm -ti -p 5001:5001 --link redis:client_de_redis  marian/rebrow -d`
-
+`docker run --name redis-client -p 5001:5001 --link redis -d  marian/rebrow`
 
 ## Listando
 
