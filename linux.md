@@ -6,6 +6,12 @@ Dicas e comandos  do linux
 
 sudo yum install ntfs-3g
 
+## Logs
+
+Logs do servidor linux
+
+dmesg | grep mensagem
+
 ## Yum
 
 Procura por um pacote que possua o comando
