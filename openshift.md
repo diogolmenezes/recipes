@@ -4,6 +4,11 @@
 
 - https://developers.redhat.com/products/openshift/download/
 
+
+## Instalar base de imagens
+
+oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/image-streams/image-streams-rhel7.json
+
 ## Subir um cluster
 
 oc cluster up
