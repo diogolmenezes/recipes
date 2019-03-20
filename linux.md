@@ -36,6 +36,10 @@ Mata o processo que está escutando a porta 3000
 
 `fuser 3000/tcp -k`
 
+Mata no MAC
+
+`sudo lsof -i tcp:3000`
+
 ## Docker sem precisar de root
 
 ```bash
