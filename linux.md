@@ -2,6 +2,16 @@
 
 Dicas e comandos  do linux
 
+# PenDrive
+
+sudo yum install ntfs-3g
+
+## Logs
+
+Logs do servidor linux
+
+dmesg | grep mensagem
+
 ## Yum
 
 Procura por um pacote que possua o comando
@@ -77,4 +87,7 @@ Crie o arquivo .desktop dessa forma
 Depois salve no desktop ou em:
 
     /usr/share/applications
+
     ~/.local/share/applications
+
+Ao salvar em /usr/share/applications a aplicação passa a ficar disponivel para ser incluida no favoritos do CentOs. Lembre de colocar o owner do .dektop como root e o grupo também.

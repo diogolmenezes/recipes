@@ -13,6 +13,10 @@ Redis é um banco de dados em memória que pode ser utilizado como cache, fila e
 
 - https://hub.docker.com/_/redis/
 
+## Client de Redis rodando em  Docker REBROW
+
+`docker run --name redis-client -p 5001:5001 --link redis -d  marian/rebrow`
+
 ## Listando
 
 ### Usando * ? ou [] para filtrar
@@ -86,7 +90,7 @@ Retorna todas as informações do usuario
 
 `HGETALL sessao:usuario:1234 "nome"`
 
-### Excluindo hash 
+### Excluindo hash
 
 `HDEL sessao:usuario:1234 "nome"`
 
@@ -193,7 +197,7 @@ Retorna o primeiro elemento
 
 Como é uma estrutura de fila é importante sempre incluirmos no final e excluirmos no inicio, assim o mais antigo da fila é sempre tratado primeiro.
 
-`RPUSH fila:confirmacao_email "diogolmenezes@gmail.com"`  
+`RPUSH fila:confirmacao_email "diogolmenezes@gmail.com"`
 
 ### Tirando da fila garantindo atomicidade
 
@@ -217,7 +221,7 @@ Aguarda indeterminadamente ate alguem chegar
 
 Podemos por exemplo criar conjuntos de amigos
 
-### Inserindo em um conjunto 
+### Inserindo em um conjunto
 
 `SADD amigos:diogo "joao" "maria" "ana"`
 
@@ -265,7 +269,7 @@ Amigos da beatriz que o diogo não conhece
 
 ## Conjuntos com ordem
 
-### Incluindo no conjunto ordenado 
+### Incluindo no conjunto ordenado
 
 `ZADD pontuacoes 20540 diogo`
 
