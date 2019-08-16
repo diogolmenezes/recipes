@@ -2,6 +2,12 @@
 
 http://docker.com/
 
+## Ver o conteudo de uma imagem
+
+```bash
+docker run -it image_name sh
+```
+
 ## Docker sem precisar de root
 
 ```bash
