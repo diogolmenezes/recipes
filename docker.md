@@ -35,7 +35,7 @@ $ docker rmi imagem
 
 ## Removendo todas as imagens
 
-$ docker image prune
+$ docker image prune -a
 
 ## Salvando uma imagem
 
@@ -79,6 +79,7 @@ ou
 
 $ docker rm $(docker ps -qa)
 
+
 ## Acessando o container
 
 $ docker exec -it container bash
@@ -107,6 +108,10 @@ $ docker run -rm -it ubuntu bash
 root@ubuntu# ping 123.123.123.123
 root@ubuntu# apt-get install -y mysql-client
 root@ubuntu# mysql -h 123.123.123.123 -u root -p
+
+## Acessando uma imagem
+
+$ docker run --rm -it imagem bash
 
 ## Comitando uma nova imagem
 
