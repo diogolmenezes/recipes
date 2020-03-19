@@ -65,3 +65,14 @@ const param = $call.pathParam.get(## PARAM ##);
 const info = $call.accessToken.extraInfo;
 const cpf = info.get("cpf");
 ```
+
+## Gerando um Sensedia Auth
+
+    Entre em Access Tokens no Manager e crie um token com o extra fields - userId: -1, associe ele ao plano API Manager 3.0 ( Integration Plan )
+
+## Revogando um token
+
+    Clique em ... na interface depois API Manager Browser para pegar a base URL, depois de um DELETE para
+    
+    DELETE baseUrl/access-tokens/ + tokenParaRevogar
+
