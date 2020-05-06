@@ -72,7 +72,23 @@ const cpf = info.get("cpf");
 
 ## Revogando um token
 
-    Clique em ... na interface depois API Manager Browser para pegar a base URL, depois de um DELETE para
+    Clique em ... na interface depois API Manager Browser para pegar a base URL, depois de um request de DELETE para
     
     DELETE baseUrl/access-tokens/ + tokenParaRevogar
 
+## Incluindo atributos adicionais na resposta
+
+    Incluir um interceptor de response, que adiciona os campos extras antes de devolver
+
+    ```javascript
+    try {
+            if($response.getStatus() == 200) { 
+                const body =  JSON.parse($response.getBody().getString('utf-8'));
+                body.teste = 'isso é um teste'
+                $call.response.getBody().setString($json.stringify(body), "utf-8");
+            }
+        }
+        catch(e) {
+            $call.tracer.trace('Erro =>', e);
+        }
+    ```
