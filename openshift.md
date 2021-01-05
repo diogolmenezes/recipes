@@ -19,13 +19,17 @@
 
 oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/image-streams/image-streams-rhel7.json
 
-## Subir um cluster
+## Login
 
-oc cluster up
+oc login
 
-## Descer um cluster
+## Listar projetos
 
-oc cluster down
+oc list
+
+## Entrar em um projeto
+
+oc project nome
 
 ## Listar pods 
 
@@ -33,7 +37,9 @@ oc get pods
 
 ## Deletar pods
 
-oc delete pods nome-do-pod
+oc delete pod nome-do-pod
+
+oc delete pod nome-do-pod --grace-period 0 --force
 
 ## Exportar as configurações
 
